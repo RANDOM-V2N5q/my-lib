@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.example.mylib.R
 import com.example.mylib.databinding.FragmentAuthenticationBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -55,7 +56,7 @@ class Authentication : Fragment() {
         auth.signInWithEmailAndPassword(viewModel.email.value!!, viewModel.password.value!!)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    //TODO: Navigate to next fragment
+                    Navigation.findNavController(requireActivity(), R.id.rootNavHostFragment).navigate(R.id.action_authentication_to_mainFragment)
                 } else {
                     Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }

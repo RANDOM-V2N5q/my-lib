@@ -5,4 +5,8 @@
     <string name="password">Hasło</string>
     <string name="createAccount">Zarejestuj</string>
     <string name="login">Zaloguj</string>
+    <string name="movies">Filmy</string>
+    <string name="books">Książki</string>
+    <string name="games">Gry</string>
+    <string name="logout">Wyloguj</string>
 </resources>
