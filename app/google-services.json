@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "56899959394",
+    "firebase_url": "https://my-lib-29954-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "my-lib-29954",
+    "storage_bucket": "my-lib-29954.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56899959394:android:1cc392f8518f5981be2f3b",
+        "android_client_info": {
+          "package_name": "com.example.mylib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56899959394-js90ks83nqcf9r6nvb0ck94kphisqbnb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlgsKaetg2Gp26NEytBhcqxYC7UBHQOcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56899959394-js90ks83nqcf9r6nvb0ck94kphisqbnb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
