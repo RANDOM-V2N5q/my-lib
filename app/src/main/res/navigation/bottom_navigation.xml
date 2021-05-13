@@ -8,7 +8,7 @@
         android:id="@+id/books"
         android:name="com.example.mylib.BooksList"
         android:label="fragment_books_list"
-        tools:layout="@layout/fragment_books_list" />
+        tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/games"
         android:name="com.example.mylib.GamesList"

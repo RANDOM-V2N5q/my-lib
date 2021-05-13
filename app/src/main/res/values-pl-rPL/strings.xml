@@ -9,4 +9,6 @@
     <string name="books">Książki</string>
     <string name="games">Gry</string>
     <string name="logout">Wyloguj</string>
+    <string name="read">Przeczytane</string>
+    <string name="to_read">Do przeczytania</string>
 </resources>
