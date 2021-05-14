@@ -56,4 +56,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
+
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 }

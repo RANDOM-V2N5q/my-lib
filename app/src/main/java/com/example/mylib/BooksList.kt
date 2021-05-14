@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mylib.databinding.FragmentListBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class BooksList : Fragment() {
@@ -26,8 +28,8 @@ class BooksList : Fragment() {
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.to_read).toUpperCase(Locale.ROOT)))
 
         val fragmentList = arrayListOf<Fragment>(
-                UniversalRecyclerview("books/done"),
-                UniversalRecyclerview("books/undone")
+                UniversalRecyclerview(Firebase.auth.uid + "/books/done"),
+                UniversalRecyclerview(Firebase.auth.uid + "/books/undone")
         )
 
         val adapter = ViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle, fragmentList)

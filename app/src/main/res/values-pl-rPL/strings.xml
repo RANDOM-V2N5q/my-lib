@@ -11,4 +11,10 @@
     <string name="logout">Wyloguj</string>
     <string name="read">Przeczytane</string>
     <string name="to_read">Do przeczytania</string>
+    <string name="title">Tytuł</string>
+    <string name="subtitle">Podtytuł</string>
+    <string name="rate">Ocena</string>
+    <string name="add">Dodaj</string>
+    <string name="delete">Usuń</string>
+    <string name="swap">Zmień</string>
 </resources>

@@ -51,9 +51,9 @@ class ItemAdapter(var list: ArrayList<ItemData>, var itemTouchHelper: ItemTouchH
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.setTitle(list[position].Title)
-        holder.setSubtitle(list[position].Subtitle)
-        holder.setRate(list[position].Rate)
+        holder.setTitle(list[position].title)
+        holder.setSubtitle(list[position].subtitle)
+        holder.setRate(list[position].rate)
     }
 
 }
