@@ -1,9 +1,6 @@
 package com.example.mylib
 
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -71,6 +68,10 @@ class UniversalRecyclerview(var path: String) : Fragment() {
             return false
         }
 
+        override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+            super.onSelectedChanged(viewHolder, actionState)
+        }
+
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.adapterPosition
             if(direction == ItemTouchHelper.LEFT) {
@@ -124,7 +125,7 @@ class UniversalRecyclerview(var path: String) : Fragment() {
     ): View {
         _binding = FragmentUniversalRecyclerviewBinding.inflate(inflater, container, false)
 
-        myAdapter = ItemAdapter(list, itemTouchHelper)
+        myAdapter = ItemAdapter(list, itemTouchHelper, this)
         myLayoutManager = LinearLayoutManager(context)
 
         binding.floatingActionButton.setOnClickListener {
@@ -142,13 +143,11 @@ class UniversalRecyclerview(var path: String) : Fragment() {
             }
 //
             override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
-//
-//                // A comment has changed, use the key to determine if we are displaying this
-//                // comment and if so displayed the changed comment.
-//                val newComment = dataSnapshot.getValue<Comment>()
-//                val commentKey = dataSnapshot.key
-//
-//                // ...
+                val idx = id.indexOfFirst { it == dataSnapshot.key }
+                if(dataSnapshot.value is Map<*, *>) {
+                    list[idx] = (ItemData(dataSnapshot.value as Map<*, *>))
+                }
+                myAdapter.notifyDataSetChanged()
             }
 //
             override fun onChildRemoved(dataSnapshot: DataSnapshot) {
@@ -193,6 +192,11 @@ class UniversalRecyclerview(var path: String) : Fragment() {
 
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
+    }
+
+    fun onItemClick(position: Int) {
+        val bottomSheet = BottomSheetUpdate(list[position], id[position], path)
+        bottomSheet.show(requireActivity().supportFragmentManager, "")
     }
 
     override fun onDestroyView() {

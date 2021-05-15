@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ItemAdapter(var list: ArrayList<ItemData>, var itemTouchHelper: ItemTouchHelper): RecyclerView.Adapter<ItemAdapter.Holder>() {
+class ItemAdapter(var list: ArrayList<ItemData>, var itemTouchHelper: ItemTouchHelper, var urv: UniversalRecyclerview): RecyclerView.Adapter<ItemAdapter.Holder>() {
 
     inner class Holder(view: View): RecyclerView.ViewHolder(view) {
         fun setTitle(title: String) {
@@ -54,6 +54,10 @@ class ItemAdapter(var list: ArrayList<ItemData>, var itemTouchHelper: ItemTouchH
         holder.setTitle(list[position].title)
         holder.setSubtitle(list[position].subtitle)
         holder.setRate(list[position].rate)
+
+        holder.itemView.setOnClickListener {
+            urv.onItemClick(position)
+        }
     }
 
 }
