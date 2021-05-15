@@ -79,7 +79,12 @@ class UniversalRecyclerview(var path: String) : Fragment() {
             else if(direction == ItemTouchHelper.RIGHT) {
                 val position = viewHolder.adapterPosition
                 database.child(id[position]).removeValue()
-                Firebase.database.getReference(path.replace("done", "undone")).setValue(list[position])
+                if(path.endsWith("/done")){
+                    Firebase.database.getReference(path.replace("/done", "/undone")).push().setValue(list[position])
+                }
+                else if(path.endsWith("/undone")) {
+                    Firebase.database.getReference(path.replace("/undone", "/done")).push().setValue(list[position])
+                }
             }
             list.removeAt(position)
             id.removeAt(position)

@@ -17,4 +17,8 @@
     <string name="add">Dodaj</string>
     <string name="delete">Usuń</string>
     <string name="swap">Zmień</string>
+    <string name="played">Ograne</string>
+    <string name="to_play">Do ogania</string>
+    <string name="watched">Obejrzane</string>
+    <string name="to_watch">Do obejrzenia</string>
 </resources>

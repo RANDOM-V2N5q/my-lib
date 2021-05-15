@@ -18,4 +18,8 @@
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="swap">Swap</string>
+    <string name="played">Played</string>
+    <string name="to_play">To play</string>
+    <string name="watched">Watched</string>
+    <string name="to_watch">To watch</string>
 </resources>
