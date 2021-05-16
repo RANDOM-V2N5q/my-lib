@@ -22,4 +22,5 @@
     <string name="to_play">To play</string>
     <string name="watched">Watched</string>
     <string name="to_watch">To watch</string>
+    <string name="search">Search</string>
 </resources>

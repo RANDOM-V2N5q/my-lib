@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,8 @@ class UniversalRecyclerview(var path: String) : Fragment() {
     private var _binding: FragmentUniversalRecyclerviewBinding? = null
     private val binding get() = _binding!!
 
+    private val completeList = ArrayList<ItemData>()
+    private val completeId = ArrayList<String>()
     private val list = ArrayList<ItemData>()
     private val id = ArrayList<String>()
     private val database = Firebase.database.getReference(path)
@@ -34,6 +37,7 @@ class UniversalRecyclerview(var path: String) : Fragment() {
     private lateinit var myAdapter: ItemAdapter
     private lateinit var myLayoutManager: LinearLayoutManager
     private lateinit var recyclerView: RecyclerView
+    private lateinit var viewModel: ActivityViewModel
 
     private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
         ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -125,19 +129,41 @@ class UniversalRecyclerview(var path: String) : Fragment() {
     ): View {
         _binding = FragmentUniversalRecyclerviewBinding.inflate(inflater, container, false)
 
+        viewModel = ViewModelProvider(requireActivity()).get(ActivityViewModel::class.java)
+        viewModel.searchPrase.observe(viewLifecycleOwner, {
+            list.clear()
+            id.clear()
+            for((idx, itemData) in completeList.withIndex()) {
+                if(itemData.title.contains(viewModel.searchPrase.value.toString(), ignoreCase = true)) {
+                    list.add(itemData)
+                    id.add(completeId[idx])
+                }
+            }
+            myAdapter.notifyDataSetChanged()
+        })
+
         myAdapter = ItemAdapter(list, itemTouchHelper, this)
         myLayoutManager = LinearLayoutManager(context)
 
         binding.floatingActionButton.setOnClickListener {
-            val bottomSheet = BottomSheetInput(path, list.size + 1)
+            val bottomSheet = BottomSheetInput(path, completeList.size + 1)
             bottomSheet.show(requireActivity().supportFragmentManager, "")
         }
 
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                id.add(dataSnapshot.key!!)
+                completeId.add(dataSnapshot.key!!)
                 if(dataSnapshot.value is Map<*, *>) {
+                    completeList.add(ItemData(dataSnapshot.value as Map<*, *>))
+
+                    if(viewModel.searchPrase.value.toString().isBlank()) {
                         list.add(ItemData(dataSnapshot.value as Map<*, *>))
+                        id.add(dataSnapshot.key!!)
+                    }
+                    else if(ItemData(dataSnapshot.value as Map<*, *>).title.contains(viewModel.searchPrase.value.toString(), ignoreCase = true)) {
+                        list.add(ItemData(dataSnapshot.value as Map<*, *>))
+                        id.add(dataSnapshot.key!!)
+                    }
                 }
                 myAdapter.notifyDataSetChanged()
             }
